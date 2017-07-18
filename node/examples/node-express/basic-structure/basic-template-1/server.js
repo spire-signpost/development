@@ -14,6 +14,8 @@ const express = require('express');
 // require handlebars template engine
 const hbs = require('hbs');
 
+// store port for the app - e.g. port set by heroku for hosting OR set default for local dev...
+const port = process.env.PORT || 3030; // process.env object stores env variables as key:value pairs
 // use express
 var app = express();
 
@@ -85,4 +87,7 @@ app.get('/json', (req, res) => {
 });
 
 // specify port number for server
-app.listen(3030);
+app.listen(port, () => {
+  // output server and port - heroku will modify randomly...
+  console.log(`server now listening on port ${port}`);
+});
