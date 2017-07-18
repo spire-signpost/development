@@ -15,7 +15,8 @@ const express = require('express');
 const hbs = require('hbs');
 
 // store port for the app - e.g. port set by heroku for hosting OR set default for local dev...
-const port = process.env.PORT || 3030; // process.env object stores env variables as key:value pairs
+// process.env object stores env variables as key:value pairs
+const port = process.env.PORT || 3030;
 // use express
 var app = express();
 
