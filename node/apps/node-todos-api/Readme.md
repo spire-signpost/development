@@ -2,6 +2,8 @@
 
 Basic Todos app with Node.js, Mongoose, and MongoDB.
 
+Deploy app to Heroku with add-on mLab MongoDB.
+
 Features include,
 
   * Todos app combining Node.js, Mongoose, MongoDB &c.
