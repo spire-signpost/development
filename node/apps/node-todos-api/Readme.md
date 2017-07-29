@@ -14,3 +14,9 @@ Features include,
   * create a document using the model
   * set validators for model properties
   * save document to the DB
+
+#### v0.8 - deploy app to Heroku with MongoDB publication
+  * update Port setting to work with local and Heroku
+  * update app listen to use dynamic port
+  * modify package.json for start script and engines
+  * test deploy to Heroku
