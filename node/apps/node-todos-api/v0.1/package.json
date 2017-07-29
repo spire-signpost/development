@@ -1,0 +1,15 @@
+{
+  "name": "node-todos-api",
+  "version": "0.1.0",
+  "description": "test node.js todos with mongodb",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^2.2.30",
+    "mongoose": "^4.11.4"
+  }
+}
