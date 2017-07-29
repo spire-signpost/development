@@ -1,6 +1,6 @@
 ### Development - Node - Test
 
-A few tests for Node.js.
+Some basic tests for Node.js.
 
 #### Contents
   * node-mongo-driver
