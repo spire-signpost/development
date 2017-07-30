@@ -29,7 +29,7 @@ Features include,
   * modify package.json for start script and engines
   * test deploy to Heroku
 
-#### v1.0 - test api route and function - PATCH route with parameter
+#### v1.0 - add route and tests for Todo API - PATCH route with parameter
   * add lodash js utility library
   * add PATCH route with params
   * check and validate required params - pick only required params for body
