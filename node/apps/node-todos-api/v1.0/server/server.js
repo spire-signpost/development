@@ -1,7 +1,6 @@
 /*
   Node.js, MongoDB, and Mongoose Todo app - v1.0
   - server.js
-  - a route to GET a single item
 */
 
 /*
@@ -39,6 +38,7 @@ app.use(bodyParser.json());
   - GET
   - POST
   - DELETE
+  - PATCH
 */
 // GET route for todo items
 app.get('/todos', (req, res) => {
