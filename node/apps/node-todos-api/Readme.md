@@ -17,6 +17,12 @@ Features include,
   * set validators for model properties
   * save document to the DB
 
+#### v0.2 - add route for Todo API - POST
+  * refactor app for modules and models
+  * add api route for POST
+  * update DB
+  * test route with Postman
+
 #### v0.8 - deploy app to Heroku with MongoDB publication
   * update Port setting to work with local and Heroku
   * update app listen to use dynamic port
