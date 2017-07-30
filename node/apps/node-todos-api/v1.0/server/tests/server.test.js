@@ -2,7 +2,6 @@
   TEST FILE
   - Node.js, MongoDB, and Mongoose Todo app - v1.0
   - server.test.js
-  - test GET route with Paramas specified
 */
 
 /*
