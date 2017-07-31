@@ -42,9 +42,11 @@ beforeEach((done) => {
 
 /*
   test routes
+  - POST
+  - GET
   - GET with PARAMS
   - DELETE with PARAMS
-  - PATCH with params
+  - PATCH with PARAMS
 */
 
 // describe for the POST API route
@@ -55,7 +57,7 @@ describe('POST /todos', () => {
 
     // use Supertest to test POST - pass app object
     request(app)
-      .post('/todos') // call post method from app object - i.e. call api route 
+      .post('/todos') // call post method from app object - i.e. call api route
       .send({
         text // ES6 shortcut for text: text
       })
