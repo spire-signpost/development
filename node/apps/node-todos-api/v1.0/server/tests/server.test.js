@@ -55,8 +55,8 @@ describe('POST /todos', () => {
   it('should create a new todo item', (done) => {
     var text = 'some text for a todo item...';
 
-    // use Supertest to test POST - pass app object
-    request(app)
+    // use Supertest to test POST
+    request(app) // pass app object
       .post('/todos') // call post method from app object - i.e. call api route
       .send({
         text // ES6 shortcut for text: text
