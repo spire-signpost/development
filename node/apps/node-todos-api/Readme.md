@@ -23,6 +23,12 @@ Features include,
   * update DB
   * test route with Postman
 
+#### v0.3 - test api route and functions - POST
+  * setup testing suite
+  * test POST API route
+  * test add todo item
+  * test not creating todo item with invalid data
+
 #### v0.8 - deploy app to Heroku with MongoDB publication
   * update Port setting to work with local and Heroku
   * update app listen to use dynamic port
