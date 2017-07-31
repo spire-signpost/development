@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 // specify preferred Promise library
 mongoose.Promise = global.Promise;
 //connect to MongoDB using Mongoose - use mLab or local uri
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/NodeTodoApp'); // process environment returns mLab uri
+mongoose.connect(process.env.MONGODB_URI); // process environment returns mLab uri - url set by process.env in server.js
 
 
 // module exports

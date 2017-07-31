@@ -4,18 +4,34 @@
 */
 
 /*
+  set required environment variables
+*/
+// set some environment variables
+var env = process.env.NODE_ENV || 'development';
+// log current environment
+console.log('current env =', env);
+
+// check current environment
+if (env === 'development') {
+  process.env.PORT = 3030;
+  process.env.MONGODB_URI = 'mongodb://localhost:27017/NodeTodoApp';
+} else if (env === 'test') {
+  process.env.PORT = 3030;
+  process.env.MONGODB_URI = 'mongodb://localhost:27017/NodeTodoAppTester';
+}
+
+/*
   require modules
 */
-
 // npm - require installed modules
+// lodash js library - utilities
+const _ = require('lodash');
 // express web framework
 const express = require('express');
 // body-parser module
 const bodyParser = require('body-parser');
 // ObjectID for validation
 const {ObjectID} = require('mongodb');
-// lodash js library - utilities
-const _ = require('lodash');
 
 // local - get mongoose property using ES6 destructuring - name of created local variable will match the property of the object
 var {mongoose} = require('./dbms/mongoose-config'); // require custom mongoose config created for app
@@ -27,8 +43,8 @@ var {User} = require('./models/user-model.js');
 // create express app
 var app = express();
 
-// environment port variable
-const port = process.env.PORT || 3030;
+// environment port variable - set relative to environment variable
+const port = process.env.PORT;
 
 // configure middleware for body-parser
 app.use(bodyParser.json());
@@ -40,6 +56,21 @@ app.use(bodyParser.json());
   - DELETE
   - PATCH
 */
+// POST route for todo items
+app.post('/todos', (req, res) => { // route url for all todo items - use for post and get...
+  // create todo item from model
+  var todo = new Todo({
+    text: req.body.text // specify text for each todo item
+  });
+
+  todo.save().then((doc) => {
+    res.send(doc); // send back to the saved document details
+  }, (error) => {
+    // send back errors...
+    res.status(400).send(error); // send back error and status code for request...
+  });
+});
+
 // GET route for todo items
 app.get('/todos', (req, res) => {
   Todo.find().then((todos) => { // promised resolved with all of the todos from the db
@@ -78,21 +109,6 @@ app.get('/todos/:id', (req, res) => {
 
 });
 
-// POST route for todo items
-app.post('/todos', (req, res) => { // route url for all todo items - use for post and get...
-  // create todo item from model
-  var todo = new Todo({
-    text: req.body.text // specify text for each todo item
-  });
-
-  todo.save().then((doc) => {
-    res.send(doc); // send back to the saved document details
-  }, (error) => {
-    // send back errors...
-    res.status(400).send(error); // send back error and status code for request...
-  });
-});
-
 // DELETE route for single doc with ID
 app.delete('/todos/:id', (req, res) => {
   // get params ID from req
@@ -112,7 +128,7 @@ app.delete('/todos/:id', (req, res) => {
       return res.status(404).send();
     }
     // otherwise return the data for the deleted params ID
-    res.send(todo);
+    res.send({todo});
   }).catch((error) => { // catch return errors for the query
     res.status(400).send();
   });
