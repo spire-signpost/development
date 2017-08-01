@@ -43,3 +43,7 @@ Features include,
   * update and return doc in DB - new doc
   * error handling for todo item
   * test with Postman
+
+#### v1.0.1 - basic refactor of code structure
+  * basic refactor of server.js
+  * add config for env variables
