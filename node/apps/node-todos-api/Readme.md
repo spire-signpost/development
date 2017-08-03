@@ -40,6 +40,13 @@ Features include,
   * update length checks for new dummy objects for POST route
   * add `describe` for GET route test
 
+#### v0.6 - Mongoose query options
+  * query options for find all, find one, and find by ID
+  * return found docs
+  * add validation
+    * basic with catch
+    * additional with ObjectID and MongoDB native driver - `isValid()` &c.
+
 #### v0.8 - deploy app to Heroku with MongoDB publication
   * update Port setting to work with local and Heroku
   * update app listen to use dynamic port
