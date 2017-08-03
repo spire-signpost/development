@@ -60,6 +60,11 @@ Features include,
   * modify package.json for start script and engines
   * test deploy to Heroku
 
+#### v0.9 - add route and tests for Todo API - DELETE route with parameter
+  * add DELETE route with params
+  * create test methods for removing docs by id &c.
+  * test with Postman
+
 #### v1.0 - add route and tests for Todo API - PATCH route with parameter
   * add lodash js utility library
   * add PATCH route with params
