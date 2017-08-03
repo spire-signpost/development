@@ -29,6 +29,17 @@ Features include,
   * test add todo item
   * test not creating todo item with invalid data
 
+#### v0.4 - add route for Todo API - GET
+  * add GET route
+  * find and return todo items from DB
+  * test with Postman
+
+#### v0.5 - test api route and functions - GET
+  * modify tests for GET route
+  * update `beforeEach` to add dummy objects for todo items
+  * update length checks for new dummy objects for POST route
+  * add `describe` for GET route test
+
 #### v0.8 - deploy app to Heroku with MongoDB publication
   * update Port setting to work with local and Heroku
   * update app listen to use dynamic port
