@@ -47,6 +47,13 @@ Features include,
     * basic with catch
     * additional with ObjectID and MongoDB native driver - `isValid()` &c.
 
+#### v0.7 - test api route and function - GET route with parameter
+  * add GET route with params
+  * check and validate passed params
+  * find and return data or send back error...
+  * test with Postman & update `server.test.js` test cases...
+    * add dummy docs to DB, and test route with ObjectID
+
 #### v0.8 - deploy app to Heroku with MongoDB publication
   * update Port setting to work with local and Heroku
   * update app listen to use dynamic port
