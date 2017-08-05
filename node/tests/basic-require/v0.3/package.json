@@ -1,0 +1,14 @@
+{
+  "name": "node-notes",
+  "version": "0.3.0",
+  "description": "test node notes app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "spire and the signpost",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
