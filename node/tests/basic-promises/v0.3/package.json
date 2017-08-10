@@ -1,0 +1,14 @@
+{
+  "name": "basic-promises",
+  "version": "0.3.0",
+  "description": "tests for basic promise usage",
+  "main": "promises.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
