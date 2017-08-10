@@ -6,7 +6,7 @@
 /* TEST - Uncomment to run tests with JSON...
 // create simple object
 var testObj = {
-    author: 'ancientlives'
+    author: 'daisy'
 };
 
 // create a string from the passed object
