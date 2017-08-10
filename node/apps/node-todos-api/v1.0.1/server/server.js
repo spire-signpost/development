@@ -3,6 +3,9 @@
   - server.js
 */
 
+// require config for env
+require('./config/config');
+
 /*
   require modules
 */
