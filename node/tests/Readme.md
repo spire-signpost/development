@@ -5,5 +5,6 @@ Some basic tests for Node.js.
 #### Contents
   * basic-async
   * basic-callback
+  * basic-json
   * basic-require
   * node-mongo-driver
