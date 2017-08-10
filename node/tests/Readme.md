@@ -6,5 +6,6 @@ Some basic tests for Node.js.
   * basic-async
   * basic-callback
   * basic-json
+  * basic-promises
   * basic-require
   * node-mongo-driver
