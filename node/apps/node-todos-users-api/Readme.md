@@ -16,5 +16,8 @@ Features include,
   * save user to db
   * check with Postman - n.b. server needs to be restarted, DB wiped
 
-#### v0.2 - add authentication for users
-  * 
+#### v0.2 - test authentication options for users
+  * add playground test for hashing and salting token concept - hash-sha
+    * use npm module `crypto-js` for test
+  * add playground test for JWT authentication - hash-jwt
+    * use npm module for JWT `jsonwebtoken` for production app
