@@ -10,5 +10,8 @@ Features include,
   * users and authentication
   * security updates
 
-#### v0.1 -
-  *
+#### v0.1 - add POST route for users
+  * update User model - include email, password, tokens
+  * add new post route to server.js
+  * save user to db
+  * check with Postman - n.b. server needs to be restarted, DB wiped
