@@ -1,4 +1,4 @@
-### Readme - Development - Node.js - Node Todos Users API
+### Readme - Apps - Node Todos Users API
 
 Basic Todos app with Node.js, Mongoose, and MongoDB.
 
@@ -15,3 +15,6 @@ Features include,
   * add new post route to server.js
   * save user to db
   * check with Postman - n.b. server needs to be restarted, DB wiped
+
+#### v0.2 - add authentication for users
+  * 
