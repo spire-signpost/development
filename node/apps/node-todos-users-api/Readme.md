@@ -21,3 +21,9 @@ Features include,
     * use npm module `crypto-js` for test
   * add playground test for JWT authentication - hash-jwt
     * use npm module for JWT `jsonwebtoken` for production app
+
+#### v0.3 - add auth and custom user models
+  * add auth token creation and save to POST /users route in server.js
+  * add custom methods to user model
+    * generate auth token
+    * override json return for user object
