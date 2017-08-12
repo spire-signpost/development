@@ -1,5 +1,5 @@
 {
-  "name": "node-todos-api",
+  "name": "node-todos-users-api",
   "version": "0.3.0",
   "description": "test node.js todos with mongodb - users",
   "main": "app.js",

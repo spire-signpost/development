@@ -33,3 +33,9 @@ Features include,
   * add authentication by validating token in header
   * add error handling for token errors, no user &c.
   * test with postman
+
+#### v0.5 - abstract authentication to middleware
+  * add new middleware directory and authenticate file
+  * abstract authentication to separate function
+  * call authenticate from private API route
+  * test with postman
