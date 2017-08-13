@@ -39,3 +39,11 @@ Features include,
   * abstract authentication to separate function
   * call authenticate from private API route
   * test with postman
+
+#### v0.6 - hashing passwords and middleware
+  * use npm module `bcryptjs` for hash and salt
+  * add bcrypt tests to playground
+  * add mongoose middleware to user schema
+    * use `pre()` to schema to hash and salt password
+    * then continue schema execution to save doc to db
+  * test with postman
