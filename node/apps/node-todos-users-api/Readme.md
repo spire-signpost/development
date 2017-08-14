@@ -60,3 +60,10 @@ Features include,
     * test authentication, missing info, user validation and creation &c.
   * test for creating, saving, validating &c. user
   * test with mocha, expect, and supertest
+
+#### v0.9 - add POST route for user login
+  * add new route to `server.js`
+    * POST route for user login
+  * update user model to find a user with credentials
+  * generate and return auth token
+  * test with postman
