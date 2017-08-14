@@ -47,3 +47,9 @@ Features include,
     * use `pre()` to schema to hash and salt password
     * then continue schema execution to save doc to db
   * test with postman
+
+#### v0.7 - add test data functions for seeding data
+  * move test data functions to seed file
+  * create dummy test data for users and todos
+  * refactor code and structure for testing
+  * run tests for seeding dummy data
