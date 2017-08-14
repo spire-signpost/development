@@ -53,3 +53,10 @@ Features include,
   * create dummy test data for users and todos
   * refactor code and structure for testing
   * run tests for seeding dummy data
+
+#### v0.8 - add test cases for GET and POST users
+  * update `server.test.js` for Users routes
+  * add test cases for updated routes
+    * test authentication, missing info, user validation and creation &c.
+  * test for creating, saving, validating &c. user
+  * test with mocha, expect, and supertest
