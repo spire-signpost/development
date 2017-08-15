@@ -79,3 +79,8 @@ Features include,
   * logout authenticated user by removing token from db
   * add authentication check to route
   * test with postman
+
+#### v1.0.1 - add test cases for DELETE logout route
+  * add test case for deletion of token for user logout
+  * check db for token deletion
+  * test with postman
