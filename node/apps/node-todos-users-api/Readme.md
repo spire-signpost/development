@@ -84,3 +84,11 @@ Features include,
   * add test case for deletion of token for user logout
   * check db for token deletion
   * test with postman
+
+#### v1.1 - update TODO model and routes - add privacy
+  * add authentication to GET, POST, DELETE, and PATCH routes for todos
+  * add author to todo model - required
+  * save todo with author id set to user
+  * check user can only update todos they created
+  * update test cases
+  * test with mocha, expect, and supertest
