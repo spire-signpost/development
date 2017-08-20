@@ -92,3 +92,9 @@ Features include,
   * check user can only update todos they created
   * update test cases
   * test with mocha, expect, and supertest
+
+#### v1.2 - update app config
+  * abstract app config variables &c. to separate json
+  * load json in config js
+  * check config json is not pushed to remote repo
+  * update app for secured env variables
