@@ -79,3 +79,22 @@ Features include,
   * logout authenticated user by removing token from db
   * add authentication check to route
   * test with postman
+
+#### v1.0.1 - add test cases for DELETE logout route
+  * add test case for deletion of token for user logout
+  * check db for token deletion
+  * test with postman
+
+#### v1.1 - update TODO model and routes - add privacy
+  * add authentication to GET, POST, DELETE, and PATCH routes for todos
+  * add author to todo model - required
+  * save todo with author id set to user
+  * check user can only update todos they created
+  * update test cases
+  * test with mocha, expect, and supertest
+
+#### v1.2 - update app config
+  * abstract app config variables &c. to separate json
+  * load json in config js
+  * check config json is not pushed to remote repo
+  * update app for secured env variables
