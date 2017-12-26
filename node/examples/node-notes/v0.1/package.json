@@ -1,0 +1,14 @@
+{
+  "name": "node-notes",
+  "version": "0.1.0",
+  "description": "test node notes app - command line",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ancientlives",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
