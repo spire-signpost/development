@@ -4,3 +4,4 @@ A variety of examples, concepts, templates &c. for working with Node.js and the 
 
 #### Contents
   * basic-structure
+  * node-express-starter

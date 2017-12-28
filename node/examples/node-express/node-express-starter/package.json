@@ -1,0 +1,24 @@
+{
+  "name": "node-express-starter",
+  "version": "0.0.1",
+  "description": "basic starter template for node.js and express...",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "9.2.1"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "starter",
+    "template"
+  ],
+  "author": "spire and the signpost",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
