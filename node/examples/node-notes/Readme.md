@@ -8,3 +8,6 @@ An example Node.js command line app for basic note taking.
   * v0.2
     * add third party module `yargs`
     * process user input at the command line using this module
+  * v0.3
+    * create and persist notes to defined JSON file
+    * check for errors and duplicates
