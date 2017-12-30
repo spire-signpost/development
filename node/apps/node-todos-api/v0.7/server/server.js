@@ -55,7 +55,7 @@ app.get('/todos/:id', (req, res) => {
     return res.status(404).send();
   }
 
-  // test find for GET route with params 0 e.g. ID
+  // test find for GET route with params - e.g. ID
   Todo.findById(params_id).then((todo) => {
     // check if return data available
     if (!todo) {

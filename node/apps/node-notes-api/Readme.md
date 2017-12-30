@@ -22,3 +22,9 @@ Features include,
   * refactor code for models &c.
   * add API for notes - setup server
   * add API for notes - POST route
+
+#### v0.3 - update API routes with initial validation
+  * add API for notes - GET route
+  * add API for notes - GET route with parameter
+  * add validation &c.
+  * Mongoose - call `findById()`
