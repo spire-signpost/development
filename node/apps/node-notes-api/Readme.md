@@ -16,3 +16,9 @@ Features include,
   * create a document using the model
   * set validators for model properties
   * save document to the DB
+
+#### v0.2 - start to build API
+  * refactor code for Mongoose
+  * refactor code for models &c.
+  * add API for notes - setup server
+  * add API for notes - POST route
