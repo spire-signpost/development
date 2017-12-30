@@ -11,3 +11,6 @@ An example Node.js command line app for basic note taking.
   * v0.3
     * create and persist notes to defined JSON file
     * check for errors and duplicates
+  * v0.4
+    * code refactoring of basic app
+    * add functions for fetch and save notes
