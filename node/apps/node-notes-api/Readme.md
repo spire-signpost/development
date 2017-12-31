@@ -36,3 +36,7 @@ Features include,
 #### v0.5 - update API with delete options
   * DELETE route and options
   * add API for notes - DELETE route with parameter
+
+#### v0.6 - update API with patch options
+  * add utility module - Lodash
+  * add API for notes - PATCH route with parameter
