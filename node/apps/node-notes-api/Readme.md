@@ -32,3 +32,7 @@ Features include,
 #### v0.4 - remote hosting and data store
   * Heroku & MongoDB
   * deploy app with DB support
+
+#### v0.5 - update API with delete options
+  * DELETE route and options
+  * add API for notes - DELETE route with parameter
