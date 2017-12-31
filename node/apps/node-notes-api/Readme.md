@@ -28,3 +28,7 @@ Features include,
   * add API for notes - GET route with parameter
   * add validation &c.
   * Mongoose - call `findById()`
+
+#### v0.4 - remote hosting and data store
+  * Heroku & MongoDB
+  * deploy app with DB support

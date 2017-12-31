@@ -1,6 +1,6 @@
 {
   "name": "node-notes-api",
-  "version": "0.2",
+  "version": "0.2.0",
   "description": "notes api with node.js &c.",
   "main": "index.js",
   "scripts": {
