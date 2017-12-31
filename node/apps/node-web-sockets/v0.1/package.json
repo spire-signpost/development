@@ -1,6 +1,6 @@
 {
   "name": "node-web-sockets",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "node & web sockets based test app",
   "main": "index.js",
   "scripts": {
