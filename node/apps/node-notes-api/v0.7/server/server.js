@@ -3,7 +3,6 @@
 * server.js
 */
 
-
 /*
 * require modules for app
 */
@@ -27,6 +26,7 @@ var {Note} = require('./models/note-model.js');
 var app = express();
 // configure middleware for body-parser
 app.use(bodyParser.json());
+
 // environment port variable
 const port = process.env.PORT || 3030;
 
