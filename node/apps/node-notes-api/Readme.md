@@ -40,3 +40,6 @@ Features include,
 #### v0.6 - update API with patch options
   * add utility module - Lodash
   * add API for notes - PATCH route with parameter
+
+#### v0.7 - update note model
+  * modify note for `updatedAt` and `createdAt`
