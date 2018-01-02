@@ -10,3 +10,9 @@ Features include,
   * setup initial server for app
   * add basic route for static file directory
   * add config for Git and Heroku
+
+#### v0.2 - add socket.io
+  * server and socket.io.js library
+  * socket communication
+  * listen for events - default server event
+  * listen for events - default client event

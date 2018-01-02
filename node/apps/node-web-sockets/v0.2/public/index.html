@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>websockets starter</title>
+  </head>
+  <body>
+    <h3>WebSockets Starter</h3>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      // store socket connection - listen for connections from client to server, and vice-versa...
+      var socket = io();
+
+      // listen for a socket event - default connect to server
+      socket.on('connect', () => {
+        console.log('connected to server...');
+      });
+
+      // listen for a socket event - default disconnect from server
+      socket.on('disconnect', () => {
+        console.log('disconnected from server...');
+      });
+    </script>
+  </body>
+</html>
