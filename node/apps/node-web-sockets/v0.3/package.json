@@ -1,0 +1,26 @@
+{
+  "name": "node-web-sockets",
+  "version": "0.3.0",
+  "description": "node & web sockets based test app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "9.2.1"
+  },
+  "keywords": [
+    "node.js",
+    "web sockets",
+    "app",
+    "test"
+  ],
+  "author": "spire.signpost",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.16.2",
+    "nodemon": "^1.14.7",
+    "socket.io": "^2.0.4"
+  }
+}

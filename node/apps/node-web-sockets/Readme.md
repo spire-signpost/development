@@ -16,3 +16,7 @@ Features include,
   * socket communication
   * listen for events - default server event
   * listen for events - default client event
+
+#### v0.3 - listening and emitting custom events
+  * new note from server to client
+  * new note from client to server
