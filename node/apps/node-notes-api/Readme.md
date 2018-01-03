@@ -43,3 +43,7 @@ Features include,
 
 #### v0.7 - update note model
   * modify note for `updatedAt` and `createdAt`
+
+#### v0.8 - add user model and route
+  * add user model and access
+  * add API for users - POST route for adding users

@@ -24,7 +24,7 @@ const {ObjectID} = require('mongodb');
 var {mongoose} = require('./dbms/mongoose-config'); // require custom mongoose config created for app
 // Todo property for model
 var {Todo} = require('./models/todo-model');
-// User propertu for model
+// User property for model
 var {User} = require('./models/user-model.js');
 
 // create express app
