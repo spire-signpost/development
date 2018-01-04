@@ -20,3 +20,7 @@ Features include,
 #### v0.3 - listening and emitting custom events
   * new note from server to client
   * new note from client to server
+
+#### v0.4 - broadcasting
+  * event broadcasting
+  * customise event emits
