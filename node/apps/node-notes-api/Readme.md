@@ -47,3 +47,8 @@ Features include,
 #### v0.8 - add user model and route
   * add user model and access
   * add API for users - POST route for adding users
+
+#### v0.9 - add API for users
+  * add auth tokens
+  * Schema for user model
+  * Schema usage for user & update POST route for users
