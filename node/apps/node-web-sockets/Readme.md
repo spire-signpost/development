@@ -27,3 +27,6 @@ Features include,
 
 #### v0.5 - abstract utilities
   * socket message creation
+
+#### v0.6 - events & acknowledgements
+  * return data in acknowledgement
