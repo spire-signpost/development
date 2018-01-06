@@ -24,3 +24,6 @@ Features include,
 #### v0.4 - broadcasting
   * event broadcasting
   * customise event emits
+
+#### v0.5 - abstract utilities
+  * socket message creation
