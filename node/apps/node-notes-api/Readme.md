@@ -52,3 +52,10 @@ Features include,
   * add auth tokens
   * Schema for user model
   * Schema usage for user & update POST route for users
+
+#### v0.9.1 - add API for users
+  * private route for GET `/users/me`
+
+#### v0.9.2 - authentication
+  * abstract and refactor private route
+  * bcrypt hashing and salting
