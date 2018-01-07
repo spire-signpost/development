@@ -30,3 +30,8 @@ Features include,
 
 #### v0.6 - events & acknowledgements
   * return data in acknowledgement
+
+#### v0.7 - client forms and DOM output
+  * jQuery and HTML5
+  * render messages to UI - note creation
+  * render messages to UI - users
