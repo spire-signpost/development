@@ -1,8 +1,6 @@
 /*
-  Node.js, MongoDB, and Mongoose Todo app - users
-  - v1.0
-  - user-model.js
-  - mongoose model for users
+* Node.js, Express, Mongoose &c. notes API
+* user-model.js
 */
 
 // require mongoose module - not custom mongoose config file
@@ -58,7 +56,7 @@ UserSchema.methods.toJSON = function () {
 
 // add custom method to UserSchema objects - needs standard function syntax to provide `this` keyword
 UserSchema.methods.generateAuthToken = function () {
-  var user = this;
+  var user = this; // provides access to a document - the document this method was called against...
   // get access value from tokens in schema
   var access = 'auth';
   // create token for user from schema
@@ -71,25 +69,10 @@ UserSchema.methods.generateAuthToken = function () {
   });
 };
 
-// custom instance method - pass token to delete
-UserSchema.methods.removeToken = function (token) {
-  // lowercase `this` for instance method
-  var user = this;
-
-  // call update() on object to update - pass updates object
-  return user.update({
-    // specify what to `pull` from db - pull from tokens array
-    $pull: {
-      tokens: {
-        token: token
-      }
-    }
-  });
-};
-
 // model method for token authentication - statics defines method as a models method
 UserSchema.statics.findByToken = function (token) {
-  var user = this;
+  // user model = `this` binding - because this is a model method...
+  var User = this;
   // store decoded jwt values
   var decoded;
 
@@ -104,7 +87,7 @@ UserSchema.statics.findByToken = function (token) {
   }
 
   // return promise to query (i.e. in server.js) for requested user values
-  return user.findOne({
+  return User.findOne({
     _id: decoded._id,
     'tokens.token': token, //quotation marks required due to period in tokens.token
     'tokens.access': 'auth'
@@ -138,13 +121,30 @@ UserSchema.statics.findByCredentials = function (email, password) {
   });
 };
 
+// custom instance method - pass token to delete
+UserSchema.methods.removeToken = function (token) {
+  // lowercase `this` for instance method
+  var user = this;
+
+  // call update() on object to update - pass updates object
+  return user.update({
+    // specify what to `pull` from db - pull fro tokens array
+    $pull: {
+      tokens: {
+        token: token
+      }
+    }
+  });
+};
+
 // run some code before the schema executes save...e.g. hash passwords before save
 UserSchema.pre('save', function(next) {
+  // access document
   var user = this;
   // check if password is modified - if yes, then hash and salt is required
   if (user.isModified('password')) {
     // hash and salt password - before running save
-    bcrypt.genSalt(10, (error, salt) => { // generate salt
+    bcrypt.genSalt(15, (error, salt) => { // generate salt
       // hash password with salt
       bcrypt.hash(user.password, salt, (error, hash) => {
         // update user document with the hashed and salted password

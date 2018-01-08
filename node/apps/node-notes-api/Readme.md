@@ -64,3 +64,6 @@ Features include,
   * POST /users/login
   * add verification for email
   * check hashed password
+
+#### v0.9.4 - add API for users
+  * DELETE /users/me/token
