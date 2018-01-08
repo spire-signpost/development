@@ -6,5 +6,5 @@ Divided by technology with whimsical sub-divisions by interest.
 
 #### Contents
   * css
-  * js-plain
+  * js
   * node
