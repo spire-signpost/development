@@ -59,3 +59,8 @@ Features include,
 #### v0.9.2 - authentication
   * abstract and refactor private route
   * bcrypt hashing and salting
+
+#### v0.9.3 - add API for users
+  * POST /users/login
+  * add verification for email
+  * check hashed password
