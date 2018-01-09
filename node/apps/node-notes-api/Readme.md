@@ -67,3 +67,7 @@ Features include,
 
 #### v0.9.4 - add API for users
   * DELETE /users/me/token
+
+#### v0.9.5
+  * update NOTES with private routes
+  * update routes for POST, GET. DELETE, PATCH

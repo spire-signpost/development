@@ -8,7 +8,7 @@
 // require mongoose module - not custom mongoose config file
 var mongoose = require('mongoose');
 
-// specify model for Todo item
+// specify model for Todo item - using defined schema
 var Todo = mongoose.model('Todo', {
   // specify requirements for a property of a todo item
   text: {
