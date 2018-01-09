@@ -35,3 +35,7 @@ Features include,
   * jQuery and HTML5
   * render messages to UI - note creation
   * render messages to UI - users
+
+#### v0.8 - update UX for client
+  * clear input field
+  * add focus to the input field
