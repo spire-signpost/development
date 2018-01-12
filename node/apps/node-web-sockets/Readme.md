@@ -39,3 +39,7 @@ Features include,
 #### v0.8 - update UX for client
   * clear input field
   * add focus to the input field
+
+#### v0.8.1 - add timestamps for notes &c.
+  * Moment.js usage - server-side
+  * Moment.js usage - client-side rendering
