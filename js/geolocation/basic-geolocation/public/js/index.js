@@ -25,7 +25,7 @@ locButton.on('click', () => {
     // append new element to DOM placeholder
     locOutput.append(li);
   }, () => { // error
-    // remove disabled attributed - show location button to allow user to try again &c.
+    // remove disabled attribute - show location button to allow user to try again &c.
     locButton.removeAttr('disabled').text('check location');
     alert('unable to get location...');
   });
