@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>websockets starter</title>
+  </head>
+  <body>
+    <h3>WebSockets Starter</h3>
+
+    <section>
+      <!-- output return messages from server -->
+      <ol id="messages"></ol>
+    </section>
+
+    <!-- create new note form -->
+    <form id="note-form">
+      <input name="note" type="text" placeholder="new note text..." autofocus />
+      <button>create note</button>
+    </form>
+
+    <!-- app JS scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/utils/moment.js"></script>
+    <script src="/utils/jquery-3.2.1.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/ui.js"></script>
+  </body>
+</html>
