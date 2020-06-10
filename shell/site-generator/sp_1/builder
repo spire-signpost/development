@@ -1,0 +1,83 @@
+#!/bin/sh
+#
+# simple static site generator
+# - @spiresignpost
+# - basic config, setup, new page
+# - v0.1
+
+#### initial site config
+#
+admin="ancientlives"
+site_dir="$PWD"
+site_url="localhost/"
+site_css="./style.css"
+blog_dir="$site_dir/blog"
+blog_drafts_dir="$blog_dir/.drafts"
+blog_file="$(date +%Y).html"
+index_file="index.html"
+rss_file="rss.xml"
+
+#### initial site setup
+# - check blog & drafts dirs
+# - create new dir for site
+# - config dir index access for Apache &c.
+#
+if [ -d "$blog_drafts_dir" ] 
+then
+	# -1 for directory count - return just files count
+	current_drafts=$(( $(ls -l $blog_drafts_dir | wc -l) - 1 )) 
+	echo "Current drafts = $current_drafts "
+# else create drafts directory in defined web directory
+else
+	# read response from user input  
+	read -erp "Create blog with drafts in site directory $site_dir? y/n | " ask &&
+	# == is bash specific & = is posix shell compatible...
+	# checks for upper and lower case combinations - e.g. Y or y, yes, Yes, yEs &c.
+	if [[ "$ask" = [Yy] ]] || [[ "$ask" = [[Yy][Ee][Ss] ]]
+	then
+		# \\ needed to escape new line in printf - \ read as is... 
+		printf "Creating new blog with drafts in site directory...\\n"
+		# create new directory for blog and drafts
+		mkdir -pv "$blog_drafts_dir" || printf "Unable to create directory...please check you have write permissions for this directory."
+		# add .htaccess to restrict viewing on server - + shows index, - hides index for current directory
+		echo "Options -Indexes" > "$blog_dir/.htaccess"
+	else
+		printf "No changes made...\\n"
+		exit	
+	fi
+fi
+
+###### FN
+# name: new_post
+# desc: create a new post for blog & save to drafts
+#
+new_post() {
+	# get post title from user input
+	read -erp "Blog post title: " title
+	echo "$title"
+	# build filename from user input title 
+	# - convert file 
+	# - remove punctuation, convert upper to lower, change spaces to underscore
+	filename="$(echo $title | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '_')"
+	# check input title against existing drafts
+	if [ -f "$blog_drafts_dir/$filename.html" ]
+	then
+		echo "Drafts filename already exists..."
+		exit
+	# check input title against existing published posts
+	elif [ -f "$blog_dir/$filename.html" ]
+	then
+		echo "Published filename already exists..."
+	# if new title - open in default editor (e.g. vim)
+	else
+		$EDITOR "$blog_drafts_dir/$filename.html"
+	fi	
+}
+
+#### app usage
+# - case selection for function calls
+# - new post, &c.
+#
+case "$1" in
+	[Nn]) new_post ;;
+esac
