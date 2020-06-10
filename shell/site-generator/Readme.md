@@ -1,6 +1,6 @@
 ### Shell - Site Generator
 
-A basic shell application to generate post driven websites.
+A basic shell application to generate post driven sites.
 
 #### Contents
 * versions
