@@ -8,7 +8,7 @@
 
 #### initial site config
 #
-admin="ancientlives"
+admin="spiresignpost"
 site_dir="$PWD"
 site_url="localhost/"
 site_css="./style.css"
