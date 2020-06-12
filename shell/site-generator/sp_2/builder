@@ -2,7 +2,8 @@
 #
 # simple static site generator
 # - @spiresignpost
-# - basic config, setup, new page, publish
+# - basic config, setup, new draft page, publish
+# - initial posts in HTML
 # - v0.2
 
 #### initial site config
@@ -14,6 +15,7 @@ site_css="./style.css"
 blog_dir="$site_dir/blog"
 blog_drafts_dir="$blog_dir/.drafts"
 blog_file="$(date +%Y).html"
+post_file_type="html"
 index_file="index.html"
 rss_file="rss.xml"
 
@@ -24,8 +26,8 @@ rss_file="rss.xml"
 #
 if [ -d "$blog_drafts_dir" ] 
 then
-	# -1 for directory count - return just files count
-	current_drafts=$(( $(ls -l $blog_drafts_dir | wc -l) - 1 )) 
+	# return files count for specified post file type
+	current_drafts=$(ls -l $blog_drafts_dir/*.$post_file_type | wc -l)
 	echo "Current drafts = $current_drafts "
 # else create drafts directory in defined web directory
 else
@@ -48,6 +50,28 @@ else
 fi
 
 ###### FN
+# name: list_dir
+# desc: list contents of specified directory
+# args: 
+#	- directory path
+#	- file type
+#
+list_dir() {
+	# list dir with file type, pipe to awk with delimiter for file path, and print last column with numbers
+	files=$(ls $1/*.$2 | awk -F '/' '{print $NF}' | nl)
+}
+
+###### FN
+# name: file_chooser
+# desc: user selects file number from passed list
+# args: 
+# 	- list of files with numbers
+#
+#file_chooser() {
+# abstract file selection for publish post &c.
+#}
+
+###### FN
 # name: new_post
 # desc: create a new post for blog & save to drafts
 #
@@ -58,20 +82,39 @@ new_post() {
 	# build filename from user input title 
 	# - convert file 
 	# - remove punctuation, convert upper to lower, change spaces to underscore
-	filename="$(echo $title | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '_')"
+	filename="$(echo $title | iconv -cf UTF-8 -t ASCII//TRANSLIT | sed -e 's/&/et/g' | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '_')"
 	# check input title against existing drafts
-	if [ -f "$blog_drafts_dir/$filename.html" ]
+	if [ -f "$blog_drafts_dir/$filename.$post_file_type" ]
 	then
 		echo "Drafts filename already exists..."
 		exit
 	# check input title against existing published posts
-	elif [ -f "$blog_dir/$filename.html" ]
+	elif [ -f "$blog_dir/$filename.$post_file_type" ]
 	then
 		echo "Published filename already exists..."
 	# if new title - open in default editor (e.g. vim)
 	else
-		$EDITOR "$blog_drafts_dir/$filename.html"
+		$EDITOR "$blog_drafts_dir/$filename.$post_file_type"
 	fi	
+}
+
+###### FN
+# name: publish_post
+# desc: publish defined draft post 
+#
+publish_post() {
+	# list existing draft posts - pass blog drafts dir and file type
+	list_dir $blog_drafts_dir $post_file_type files
+	# output current file list
+	echo "$files"
+	# user chooses post to publish
+	read -erp "Select draft file number to publish - " number
+	echo "number chosen = $number"
+	# "" maintains new line for output - find number, print 2nd column
+	file="$(echo "$files" | grep -w "$number" | awk '{print $2}')"
+	echo "file published = $file"		
+	# post is moved from drafts to site directory
+	mv "$blog_drafts_dir/$file" "$blog_dir"
 }
 
 #### app usage
@@ -80,4 +123,5 @@ new_post() {
 #
 case "$1" in
 	[Nn]) new_post ;;
+	[Pp]) publish_post ;;
 esac
