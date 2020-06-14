@@ -85,7 +85,7 @@ file_chooser() {
 # 
 post_type_chooser() {
 	# show user list of possible post types
-
+	read -erp "Select the type of post:  `echo $'\n '` 1. draft post  `echo $'\n '` 2. published post  `echo $'\n> '` " number
 	# get selected post type from user
 
 	# return selected post type...
@@ -147,10 +147,23 @@ publish_post() {
 #
 delete_post() {
 	# check post type to delete - e.g. published, draft
-	post_type_chooser
+	post_type_chooser number
+	echo "post type chosen = $number"
 	# get file details, location
-
-	# delete file, return current files for post type - e.g. all remaining files for published, draft
+	if [ "$number" = "1" ]
+	then
+		list_dir $blog_drafts_dir $post_file_type files
+		echo "Current draft posts:"
+		echo "$files" | nl
+		file_chooser "$files" file
+		rm "$blog_drafts_dir/$file" && echo "$file has now been deleted."
+	else
+		list_dir $blog_dir $post_file_type files
+		echo "Current published posts:"
+		echo "$files" | nl
+	fi
+	# delete file - abstract deletion for conditional usage...
+	
 }
 
 
