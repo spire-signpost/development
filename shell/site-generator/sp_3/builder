@@ -11,6 +11,7 @@
 admin="spiresignpost"
 site_dir="$PWD"
 site_url="localhost/"
+site_port="3333"
 site_css="./style.css"
 blog_dir="$site_dir/blog"
 blog_drafts_dir="$blog_dir/.drafts"
@@ -80,15 +81,31 @@ file_chooser() {
 }
 
 ###### FN
-# name: post_type
-# desc: users selects post type - e.g. to delete a draft or publish post...
+# name: post_type_chooser
+# desc: users selects post type - e.g. draft or published post...
 # 
 post_type_chooser() {
 	# show user list of possible post types
 	read -erp "Select the type of post:  `echo $'\n '` 1. draft post  `echo $'\n '` 2. published post  `echo $'\n> '` " number
-	# get selected post type from user
+}
 
-	# return selected post type...
+###### FN
+# name: file_deleter
+# desc: delete specified file from defined directory
+# args:
+#	- filename
+#	- directory path
+#
+file_deleter() {
+	# get list of files by type for defined directory
+	list_dir $1 $2 files
+	echo "Current files:"
+	# output list of files with numbered lines
+	echo "$files" | nl
+	# get user to select file to delete
+	file_chooser "$files" file
+	# delete the file from the defined directory
+	rm "$1/$file" && echo "$file has now been deleted."
 }
 
 #########
@@ -101,8 +118,8 @@ post_type_chooser() {
 #
 new_post() {
 	# get post title from user input
-	read -erp "Blog post title: " title
-	echo "$title"
+	read -erp "New post title: " title
+	#echo "$title"
 	# build filename from user input title 
 	# - convert file 
 	# - remove punctuation, convert upper to lower, change spaces to underscore
@@ -119,6 +136,7 @@ new_post() {
 	# if new title - open in default editor (e.g. vim)
 	else
 		$EDITOR "$blog_drafts_dir/$filename.$post_file_type" 
+		echo "The new post has now been created."
 	fi	
 }
 
@@ -146,27 +164,18 @@ publish_post() {
 #	- location
 #
 delete_post() {
-	# check post type to delete - e.g. published, draft
+	# check with user - post type to delete - e.g. published, draft
 	post_type_chooser number
 	echo "post type chosen = $number"
-	# get file details, location
+	# get file details, location - default check is drafts directory 
 	if [ "$number" = "1" ]
 	then
-		list_dir $blog_drafts_dir $post_file_type files
-		echo "Current draft posts:"
-		echo "$files" | nl
-		file_chooser "$files" file
-		rm "$blog_drafts_dir/$file" && echo "$file has now been deleted."
+		file_deleter $blog_drafts_dir $post_file_type files
 	else
-		list_dir $blog_dir $post_file_type files
-		echo "Current published posts:"
-		echo "$files" | nl
+		file_deleter $blog_dir $post_file_type files
+		
 	fi
-	# delete file - abstract deletion for conditional usage...
-	
 }
-
-
 
 #### app usage
 # - case selection for function calls
