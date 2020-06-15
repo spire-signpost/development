@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# custom script - volume check
+# - alsa mixer
+#   - get volume for Master
+#   - check on/off
+#   - pipe output to grep
+# - grep
+#   - use regex to search output
+#   - find nos with %
+#   - pipe output to sed
+# - sed
+#   - edit stream output from raw search with grep
+#   - use regex to get just nos
+
+# glyphs and icons
+muteicon=$'\U2A02'
+flatvolicon=$'\U2A12'
+lowvolicon=$'\U2A13'
+midvolicon=$'\U2A14'
+hivolicon=$'\U2A16'
+
+# get current volume from alsa
+voltotal="$(amixer get Master)"
+
+#echo "$voltotal" | grep "\[off\]" >/dev/null && printf "🔇\\n" && exit
+echo "$voltotal" | grep "\[off\]" >/dev/null && printf "$muteicon\\n" && exit
+
+vol="$(echo "$voltotal" | grep -o "\[[0-9]\+%\]" | sed "s/[^0-9]*//g;1q")"
+
+# -ge = greater than or equal to - Posix
+# - gt = greater than - Posix
+#if [ "$vol" -ge "75" ]; then
+#	icon="🔊"
+	#icon=$hivolicon
+#elif [ "$vol" -ge "50" ];
+#then
+#	icon="🔉"
+	#icon=$midvolicon
+# -lt = less than - Posix
+#elif [ "$vol" -ge "25" ]; then
+#	icon="🔉"
+	#icon=$lowvolicon
+#else
+#	icon="🔈"
+	#icon=$flatvolicon
+#fi
+
+#printf "%s %s%%\\n" "$icon" "$vol"
+printf "%s %s%%\\n" "vol" "$vol"

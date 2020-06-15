@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# basic weather command
+# - uses service wttr.in
+# - default location from network
+
+curl wttr.in
+

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# file loader
+# - parameter defines file path and filename
+# - relative path if called from directory or Home directory for system call
+# - : after parameter denotes required flag value
+
+while getopts f: option
+do
+case "${option}"
+in
+f) FILE=${OPTARG};;
+esac
+done
+
+cat $FILE

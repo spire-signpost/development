@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# simple suspend script for systemd
+# - call from bar &c.
+
+systemctl suspend 

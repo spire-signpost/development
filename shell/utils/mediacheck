@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# toggle play and pause for current audio source
+# e.g. video playing in browser
+
+# solution 1 - use pacmd with sink and input
+# e.g. pacmd list-sink-input = list session active processes using audio
+
+# check pulse audio for running sink - checks against current default
+#audio_state=`pacmd list-sink-inputs | grep -o 'RUNNING'`
+
+# define toggle for media check play/pause with pacmd suspend
+# 1 = suspend state ( same as pacmd suspend 1 )
+# 0 = continue playback of media ( pacmd suspend 0 )
+
+TOGGLE_FILE=".toggle.rc"
+#togglevalue=`cat "$TOGGLE_FILE"`
+#echo $togglevalue
+togglevalue=$(fileloader -f $TOGGLE_FILE)
+
+# -z = check for empty variable value...
+if [[ "$togglevalue" == 0 || -z "$togglevalue" ]]
+then
+	((togglevalue++))
+	$(mediasuspendon) 
+	echo $togglevalue > $TOGGLE_FILE
+	
+else
+	((togglevalue--))
+	$(mediasuspendoff)
+	echo $togglevalue > $TOGGLE_FILE
+fi
+
+$(refreshbar)

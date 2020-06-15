@@ -1,0 +1,7 @@
+#!/bin/sh
+
+WIFI=`ls /sys/class/net | grep wlp*` 
+
+WIFI_STATE=`cat /sys/class/net/$WIFI/operstate`
+
+echo $WIFI_STATE

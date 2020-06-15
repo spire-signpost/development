@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# network check 
+# - wifi state, including all available networks for current location
+# - possible return date
+#	- BSSID, SSID, Mode, Channel, Rate, Signal, Bars, Security
+
+# check for connected wifi ssid
+ssid=$( nmcli connection | grep wlp2* | awk '{ print $1 }' )
+
+# get stats for connected wifi ssid
+wifi_stats=$( nmcli dev wifi | grep "$ssid" )
+
+# wifi bars for dwmbar icon
+wifi_bars=$( echo "$wifi_stats" | awk '{ print $9 }' )
+
+# get signal strength for connected wifi ssid
+wifi_output=$( echo "$wifi_stats" | awk '{ printf "ssid: " $3 "\nchannel: " $5 "\nencryption: " $10 "\ncapacity: " $6 $7 "\nstrength: " $8 "%\nbars: " $9 }' )
+
+echo "$wifi_output"

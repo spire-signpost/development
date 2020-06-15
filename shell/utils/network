@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# include network_state
+
+case $BUTTON in
+	1) notify-send "Network State" "$( network_state )";;
+esac

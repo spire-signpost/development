@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# start systemd for virtual swap and ram
+# - Zswap & Zram
+# - Zram module loaded in kernel
+# - three basic operations
+#   - status, start, stop
+
+systemd-swap start

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# refresh statusbar - dwm bar
+# useful for any manual refresh of bar data and render
+# - call at end of command execution
+# - e.g. press key for volume up, execute command, refresh bar
+
+pkill dwmbar ; dwmbar

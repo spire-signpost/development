@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# calibrate_cinema30
+# - xcalib config for Cinema Display 30
+# - load on start to correct gamma for display
+
+xcalib -green 0.97 0 83 -a
+xcalib -red 0.87 0 81 -a
+xcalib -blue 0.99 0 100 -a
+xcalib -blue 0.98 0 100 -a
+xcalib -blue 0.97 0 100 -a

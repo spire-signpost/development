@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# reset value in toggle.rc config for mediacheck
+# ensure value is default 0
+
+TOGGLE_FILE=".toggle.rc"
+echo 0 > $TOGGLE_FILE

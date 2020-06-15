@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# custom script - clock 
+# - define date
+# - european structure
+#   - day of week (e.g. Wednesday)
+#   - date (e.g. 15th)
+#   - month (e.g. May)
+#   - time (hour:min:am/pm)
+
+
+# print date - pipe to 'awk' to convert to lowercase
+printf '%s %s%s\n' "$(date '+%a %d %b')" "$(date '+%H:%M') " | awk '{print tolower($0)}'
+

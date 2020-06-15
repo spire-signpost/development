@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# dwmbar - bash script
+# sets the statusbar for dwm using `xsetroot` command
+# start as part of x startup
+# e.g. ~/.xinitrc or ~/.xprofile
+
+# include scripts
+# - network_state for wifi bars
+#source network_state
+
+# unicode glyphs &c. - fun separators
+pyramid=$'\U27C1'
+map_lighthouse=$'\U26EF'
+scribe=$'\U13041'
+playing=$'\U003E'
+paused=$'\U003D'
+network=$'\U1328D'
+suspendicon=$'\U2A00'
+
+# get current toggle value
+togglevalue=$(fileloader -f .toggle.rc)
+
+# get extras for bar output
+# - weather
+weathericon=$(curl wttr.in/60601?format="%c")
+
+# define bar output for toggle state
+if [[ "$togglevalue" == 0 ]]
+then
+	mediaicon=$paused
+else
+	mediaicon=$playing
+fi
+
+# set output for dwm statusbar
+# - weather
+# - audio
+# - network
+# - clock
+
+# set loop to check statusbar updates
+while :; do
+
+	#xsetroot -name "$scribe spire & signpost | $mediaicon | $(volume) | cpu | $(clock | tr '\n' ' ')" 
+	#xsetroot -name "$(echo -e 'volume |\x02 cpu |\x03 battery')"
+
+	# \x02 - escaped command not text dependent (i.e. can be added to any position in string - command defined in config.h)
+	# echo -e - allows escaped characters instead of rendering string as basic text
+	#	- i.e. \x02 is evaluated instead of direct rendering
+	xsetroot -name "$(echo -e '\x01 ' $scribe '\x01 spire & signpost |' $mediaicon '|' $(volume) '|\x03 cpu |\x02' $network '|' $weathericon  '|\x01' $(clock | tr '\n' ' ') '|\x04' $suspendicon)"
+
+	sleep 1m
+
+done
