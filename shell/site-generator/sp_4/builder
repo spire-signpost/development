@@ -1,0 +1,213 @@
+#!/bin/sh
+#
+# simple static site generator
+# - @spiresignpost
+# - basic config, setup 
+# - new draft page, publish, delete, list current posts
+# - initial posts in HTML
+# - v0.4
+
+#### initial site config
+#
+admin="spiresignpost"
+site_dir="$PWD"
+site_url="localhost/"
+site_port="3333"
+site_css="./style.css"
+blog_dir="$site_dir/blog"
+blog_drafts_dir="$blog_dir/.drafts"
+blog_file="$(date +%Y).html"
+post_file_type="html"
+index_file="index.html"
+rss_file="rss.xml"
+
+#### initial site setup
+# - check blog & drafts dirs
+# - create new dir for site
+# - config dir index access for Apache &c.
+#
+if [ -d "$blog_drafts_dir" ] 
+then
+	# return files count for specified post file type
+	current_drafts=$(ls -l $blog_drafts_dir/*.$post_file_type | wc -l)
+	echo "Current drafts = $current_drafts "
+# else create drafts directory in defined web directory
+else
+	# read response from user input  
+	read -erp "Create blog with drafts in site directory $site_dir? y/n | " ask &&
+	# == is bash specific & = is posix shell compatible...
+	# checks for upper and lower case combinations - e.g. Y or y, yes, Yes, yEs &c.
+	if [[ "$ask" = [Yy] ]] || [[ "$ask" = [[Yy][Ee][Ss] ]]
+	then
+		# \\ needed to escape new line in printf - \ read as is... 
+		printf "Creating new blog with drafts in site directory...\\n"
+		# create new directory for blog and drafts
+		mkdir -pv "$blog_drafts_dir" || printf "Unable to create directory...please check you have write permissions for this directory."
+		# add .htaccess to restrict viewing on server - + shows index, - hides index for current directory
+		echo "Options -Indexes" > "$blog_dir/.htaccess"
+	else
+		printf "No changes made...\\n"
+		exit	
+	fi
+fi
+
+############ 
+# Helper FNs 
+############
+
+###### FN
+# name: file_chooser
+# desc: user selects file number from passed list
+# args: 
+# 	- list of files 
+#
+file_chooser() {
+	# read user input for file number
+	read -erp "Select file number - " number
+	echo "number chosen = $number"
+	# "" maintains new line for output, add line numbers - find number, print 2nd column
+	file="$(echo "$1" | nl | grep -w "$number" | awk '{print $2}')"
+}
+
+###### FN
+# name: file_deleter
+# desc: delete specified file from defined directory
+# args:
+#	- filename
+#	- directory path
+#
+file_deleter() {
+	# get list of files by type for defined directory
+	list_dir $1 $2 files
+	echo "Current files:"
+	# output list of files with numbered lines
+	echo "$files" | nl
+	# get user to select file to delete
+	file_chooser "$files" file
+	# delete the file from the defined directory
+	rm "$1/$file" && echo "$file has now been deleted."
+}
+
+###### FN
+# name: list_dir
+# desc: list contents of specified directory
+# args: 
+#	- directory path
+#	- file type
+#
+list_dir() {
+	# list dir with file type, pipe to awk with delimiter for file path, and print last column
+	files=$(ls $1/*.$2 | awk -F '/' '{print $NF}')
+}
+
+###### FN
+# name: post_type_chooser
+# desc: users selects post type - e.g. draft or published post...
+# 
+post_type_chooser() {
+	# show user list of possible post types
+	read -erp "Select the type of post:  `echo $'\n '` 1. draft post  `echo $'\n '` 2. published post  `echo $'\n> '` " number
+}
+
+#########
+# APP FNs 
+#########
+
+###### FN
+# name: delete_post
+# desc: delete defined post - e.g. draft, published
+#
+delete_post() {
+	# check with user - post type to delete - e.g. draft, published...
+	post_type_chooser number
+	echo "post type to delete = $number"
+	# get file details, location - default check is drafts directory 
+	if [ "$number" = "1" ]
+	then
+		file_deleter $blog_drafts_dir $post_file_type files
+	else
+		file_deleter $blog_dir $post_file_type files
+		
+	fi
+}
+
+###### FN
+# name: list_posts
+# desc: list current posts by post type - e.g. draft, published
+#
+list_posts() {
+	# check with user - post type to list - e.g. draft, published...
+	post_type_chooser number
+	echo "post type to list = $number"
+		
+	# get file details, location - default check is drafts directory 
+	if [ "$number" = "1" ]
+	then
+		# list existing draft posts - pass blog drafts dir and file type
+		list_dir $blog_drafts_dir $post_file_type files
+		# output current file list, add line numbers
+		echo "Current draft posts:" 
+		echo "$files" | nl
+	else
+		# list existing draft posts - pass blog drafts dir and file type
+		list_dir $blog_dir $post_file_type files
+		# output current file list, add line numbers
+		echo "Current published posts:"
+		echo "$files" | nl
+	fi
+}
+
+###### FN
+# name: new_post
+# desc: create a new post for blog & save to drafts
+#
+new_post() {
+	# get post title from user input
+	read -erp "New post title: " title
+	#echo "$title"
+	# build filename from user input title 
+	# - convert file 
+	# - remove punctuation, convert upper to lower, change spaces to underscore
+	filename="$(echo $title | iconv -cf UTF-8 -t ASCII//TRANSLIT | sed -e 's/&/et/g' | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '_')"
+	# check input title against existing drafts
+	if [ -f "$blog_drafts_dir/$filename.$post_file_type" ]
+	then
+		echo "Drafts filename already exists..."
+		exit
+	# check input title against existing published posts
+	elif [ -f "$blog_dir/$filename.$post_file_type" ]
+	then
+		echo "Published filename already exists..."
+	# if new title - open in default editor (e.g. vim)
+	else
+		$EDITOR "$blog_drafts_dir/$filename.$post_file_type" 
+		echo "The new post has now been created."
+	fi	
+}
+
+###### FN
+# name: publish_post
+# desc: publish defined draft post 
+#
+publish_post() {
+	# list existing draft posts - pass blog drafts dir and file type
+	list_dir $blog_drafts_dir $post_file_type files
+	# output current file list, add line numbers
+	echo "$files" | nl
+	# user chooses post to publish - file details returned
+	file_chooser "$files" file
+	echo "file published = $file"		
+	# post is moved from drafts to site directory
+	mv "$blog_drafts_dir/$file" "$blog_dir"
+}
+
+#### app usage
+# - case selection for function calls
+# - new post, &c.
+#
+case "$1" in
+	[Dd]) delete_post ;;
+	[Ll]) list_posts ;;
+	[Nn]) new_post ;;
+	[Pp]) publish_post ;;
+esac
