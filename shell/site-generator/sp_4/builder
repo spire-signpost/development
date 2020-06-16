@@ -127,7 +127,6 @@ delete_post() {
 		file_deleter $blog_drafts_dir $post_file_type files
 	else
 		file_deleter $blog_dir $post_file_type files
-		
 	fi
 }
 
