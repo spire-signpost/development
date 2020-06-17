@@ -3,7 +3,9 @@
 # simple static site generator
 # - @spiresignpost
 # - basic config, setup 
-# - new draft page, publish, delete, list current posts
+# - add default for case options
+# - new draft page, publish, delete
+# - list current posts, list posts with sort order
 # - initial posts in HTML
 # - v0.4
 
@@ -26,11 +28,17 @@ rss_file="rss.xml"
 # - create new dir for site
 # - config dir index access for Apache &c.
 #
+
+# default header
+echo "|-----------------------------------------------|"
+echo "| Spire & Signpost - Simple Static Site Builder | "	
+echo "|-----------------------------------------------|"
+
 if [ -d "$blog_drafts_dir" ] 
 then
 	# return files count for specified post file type
 	current_drafts=$(ls -l $blog_drafts_dir/*.$post_file_type | wc -l)
-	echo "Current drafts = $current_drafts "
+	echo $'\n'"Current drafts = $current_drafts"$'\n'
 # else create drafts directory in defined web directory
 else
 	# read response from user input  
@@ -63,7 +71,7 @@ fi
 #
 file_chooser() {
 	# read user input for file number
-	read -erp "Select file number - " number
+	read -erp "| Select file number - " number
 	echo "number chosen = $number"
 	# "" maintains new line for output, add line numbers - find number, print 2nd column
 	file="$(echo "$1" | nl | grep -w "$number" | awk '{print $2}')"
@@ -79,7 +87,7 @@ file_chooser() {
 file_deleter() {
 	# get list of files by type for defined directory
 	list_dir $1 $2 files
-	echo "Current files:"
+	echo "| Current files:"
 	# output list of files with numbered lines
 	echo "$files" | nl
 	# get user to select file to delete
@@ -94,10 +102,17 @@ file_deleter() {
 # args: 
 #	- directory path
 #	- file type
+#	- sort order, e.g. modification time, file size, reverse order, default directory order, version
 #
 list_dir() {
-	# list dir with file type, pipe to awk with delimiter for file path, and print last column
-	files=$(ls $1/*.$2 | awk -F '/' '{print $NF}')
+	if [ "$1" != "" ]
+	then
+		# list dir with file type, pipe to awk with delimiter for file path, and print last column
+		files=$(ls $1/*.$2 | awk -F '/' '{print $NF}')
+	else
+		# list dir with file type, pipe to awk with delimiter for file path, and print last column
+		files=$(ls $1/*.$2 | awk -F '/' '{print $NF}')
+	fi
 }
 
 ###### FN
@@ -106,12 +121,24 @@ list_dir() {
 # 
 post_type_chooser() {
 	# show user list of possible post types
-	read -erp "Select the type of post:  `echo $'\n '` 1. draft post  `echo $'\n '` 2. published post  `echo $'\n> '` " number
+	read -erp "| Select the type of post:  `echo $'\n '` 1. draft post  `echo $'\n '` 2. published post  `echo $'\n> '` " number
 }
 
 #########
 # APP FNs 
 #########
+
+###### FN
+# name: default
+# desc: output default options and comment
+#	- called with default case option
+#
+default() {
+	echo "l - list posts by post type"	
+	echo "n - new post"
+	echo "p - publish a post"
+	echo "d - delete a post"
+}
 
 ###### FN
 # name: delete_post
@@ -133,7 +160,7 @@ delete_post() {
 ###### FN
 # name: list_posts
 # desc: list current posts by post type - e.g. draft, published
-#
+# args: 
 list_posts() {
 	# check with user - post type to list - e.g. draft, published...
 	post_type_chooser number
@@ -200,6 +227,14 @@ publish_post() {
 	mv "$blog_drafts_dir/$file" "$blog_dir"
 }
 
+###### FN
+# name: sort_list_posts
+# desc: sort lists of posts
+#
+#sort_list_posts() {
+#
+#}
+
 #### app usage
 # - case selection for function calls
 # - new post, &c.
@@ -209,4 +244,6 @@ case "$1" in
 	[Ll]) list_posts ;;
 	[Nn]) new_post ;;
 	[Pp]) publish_post ;;
+	[sl][SL]) sort_list_posts ;;
+	*) default ;; 
 esac
